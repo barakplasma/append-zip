@@ -6,6 +6,8 @@ import unittest
 import pathlib
 from os import remove
 from zipfile import ZipFile
+
+import sys
 import difflib
 
 from src.appendzip.appendzip import appendzip
@@ -55,8 +57,7 @@ class TestAppendZip(unittest.TestCase):
             fromzip = testzip.read('LICENSE.txt').decode("utf-8")
 
         readme = open('README.md').read()
-        d = difflib.Differ()
-        print(d.compare(readme.splitlines(True), fromzip.splitlines(True)))
+        sys.stdout.writelines(difflib.unified_diff(readme.splitlines(True), fromzip.splitlines(True)))
         self.assertEqual(hash(fromzip), hash(readme))
         deleteZip()
 
