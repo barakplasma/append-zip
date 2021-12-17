@@ -33,7 +33,7 @@ class TestAppendZip(unittest.TestCase):
     def test_create_zip(self):
         fromzip = createZip()
         license = open('LICENSE.txt').read()
-        self.assertEqual(hash(fromzip), hash(license))
+        self.assertEqual(hash(fromzip.decode("utf-8")), hash(license))
         deleteZip()
 
     def test_append_zip(self):
@@ -52,11 +52,9 @@ class TestAppendZip(unittest.TestCase):
                 "wrong number of files in zip {}"
                 .format(infolist)
             )
-            fromzip = testzip.read('LICENSE.txt')
+            fromzip = testzip.read('LICENSE.txt').decode("utf-8")
 
-        readme = open('README.md', 'b').read()
-        print("readme: ", readme)
-        print("fromzip: ", fromzip)
+        readme = open('README.md').read()
         d = difflib.Differ()
         print(d.compare(readme.splitlines(True), fromzip.splitlines(True)))
         self.assertEqual(hash(fromzip), hash(readme))
