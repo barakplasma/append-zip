@@ -58,8 +58,8 @@ class TestAppendZip(unittest.TestCase):
 
         readme = open('README.md').read()
         sys.stdout.writelines(difflib.unified_diff(
-            readme.splitlines(True),
-            fromzip.splitlines(True)
+            readme.splitlines(False),
+            fromzip.splitlines(False)
         ))
         self.assertEqual(hash(fromzip), hash(readme))
         deleteZip()
