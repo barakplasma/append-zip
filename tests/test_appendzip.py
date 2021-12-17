@@ -32,7 +32,7 @@ class TestAppendZip(unittest.TestCase):
     def test_create_zip(self):
         fromzip = createZip()
         license = open('LICENSE.txt').read()
-        self.assertAlmostEqual(len(fromzip), len(license), delta=delta)
+        self.assertEqual(hash(fromzip), hash(license))
         deleteZip()
 
     def test_append_zip(self):
@@ -54,7 +54,7 @@ class TestAppendZip(unittest.TestCase):
             fromzip = testzip.read('LICENSE.txt')
 
         readme = open('README.md').read()
-        self.assertAlmostEqual(len(fromzip), len(readme), delta=delta)
+        self.assertEqual(hash(fromzip), hash(readme))
         deleteZip()
 
     def test_delete_zip(self):
