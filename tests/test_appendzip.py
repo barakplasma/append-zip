@@ -54,7 +54,7 @@ class TestAppendZip(unittest.TestCase):
             )
             fromzip = testzip.read('LICENSE.txt')
 
-        readme = open('README.md').read()
+        readme = open('README.md', 'b').read()
         print("readme: ", readme)
         print("fromzip: ", fromzip)
         d = difflib.Differ()
