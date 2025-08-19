@@ -12,14 +12,14 @@ jobs:
   test:
     strategy:
       matrix:
-        python: ['3.10']
+        python: ['3.10','3.11','3.12','3.13','3.14']
         platform: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v5
     - name: Set up Python ${{ matrix.python }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python }}
     - name: Install test dependencies
@@ -31,17 +31,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v5
     - name: Set up Python
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v5
       with:
         python-version: '3.x'
     - name: Install build dependencies
       run: python -m pip install -U setuptools wheel build
     - name: Build
       run: python -m build .
-    - name: Publish
-      uses: pypa/gh-action-pypi-publish@master
+    - name: pypi-publish
+  # You may pin to the exact commit or the version.
+  # uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc
+      uses: pypa/gh-action-pypi-publish@v1.12.4
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
