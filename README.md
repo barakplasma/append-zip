@@ -10,7 +10,7 @@ for some reason, windows has a different file length after unzipping (by 10-20 b
 
 ## Getting started
 
-install (on Mac)
+install
 `$ python3 -m pip install appendzip`
 
 ```py
